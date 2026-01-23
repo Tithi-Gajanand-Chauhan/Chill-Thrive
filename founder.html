@@ -1,0 +1,247 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Founder | Chill Thrive</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+        /* Hero Section Layout */
+.founder-hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 10%;
+    min-height: 80vh;
+    gap: 80px;
+}
+
+
+
+.founder-profile-circle img {
+    width: 90%;
+    height: 90%;
+}
+.founder-intro {
+    
+    max-width: 700px;
+    text-align: left; /* Aligns text to the left for a cleaner look */
+}
+.founder-intro h1 {
+    font-family: 'Playfair Display', serif; /* Or any serif font you have linked */
+    font-size: 3.5rem;
+    color: #1A365D; /* Navy Blue */
+    margin: 20px 0;
+}
+
+.journey-text, .vision-text {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.8;
+    color: #4A5568; /* Dark grey for better readability */
+    margin-bottom: 20px;
+}
+/* Quote Styling */
+.founder-quote-box {
+    background-color: white;
+    padding: 100px 15%;
+    text-align: center;
+}
+
+.quote-content i {
+    color: #F18A4A; /* Thrive Orange */
+    font-size: 3rem;
+    margin-bottom: 20px;
+    opacity: 0.3;
+}
+
+.quote-content h2 {
+    font-style: italic;
+    color: #1A365D;
+    font-weight: 400;
+}
+
+/* Badge Styling */
+.badge {
+    background: #F18A4A;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+   
+/* Container Background - Set to White */
+.mission-bento-section {
+    padding: 80px 10%;
+    background-color: #ffffff; /* Matches your white background request */
+}
+
+/* Bento Grid Setup */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    gap: 25px;
+    grid-template-areas: 
+        "main main small1"
+        "main main small2"
+        "medium medium medium";
+}
+
+/* Individual Card Styling */
+.bento-card {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 30px;
+    /* This soft shadow creates the premium "floating" look */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04); 
+    border: 1px solid #f0f0f0;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Member 2 Interactive Hover */
+.bento-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(53, 116, 233, 0.1);
+    border-color: #E3F2FD; /* Soft Ice Blue border on hover */
+}
+
+/* Assigning Grid Areas */
+.mission-main { grid-area: main; }
+.value-small:nth-child(2) { grid-area: small1; }
+.value-small:nth-child(3) { grid-area: small2; }
+.value-medium { grid-area: medium; }
+
+/* Icon Styling - Using Thrive Orange */
+.card-icon {
+    font-size: 2.2rem;
+    color: #F18A4A; 
+    margin-bottom: 20px;
+}
+
+/* Typography */
+.bento-card h3, .bento-card h4 {
+    color: #1A365D; /* Navy Blue */
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+}
+
+.bento-card p {
+    color: #556172;
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .founder-hero {
+        flex-direction: column; /* Stacks image on top of text */
+        padding: 60px 5%;      /* Reduces side padding for more space */
+        gap: 40px;             /* Reduces gap between image and text */
+        text-align: center;    /* Centers the text for a better mobile look */
+    }
+
+    .founder-intro {
+        text-align: center;    /* Centers the intro text on mobile */
+    }
+
+    .founder-profile-container {
+        width: 100%;           /* Ensures the container takes full width */
+        display: flex;
+        justify-content: center;
+    }
+
+    .founder-profile-circle img {
+        width: 250px;          /* Forces the image to a much larger size on phone */
+        height: 250px;
+        border-radius: 50%;    /* Keeps it circular */
+        object-fit: cover;     /* Prevents stretching */
+    }
+    
+    .founder-intro h1 {
+        font-size: 2.5rem;    /* Shrinks the huge title so it fits on one line */
+    }
+}
+@media (max-width: 768px) {
+    /* This fixes the squashed cards in your screenshot */
+    .bento-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 0;
+    }
+
+    .bento-card {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+    </style>
+
+</head>
+    
+
+
+   
+<body class="fade-in">
+    <main class="founder-page">
+        <section class="founder-hero">
+            <div class="founder-profile-container">
+                <div class="founder-profile-circle">
+                    <img src="FOUNDER.jpeg" alt="Saurav Jhawar">
+                    <div class="play-btn-overlay">
+                        <i class="fa-solid fa-play"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="founder-intro">
+                <span class="badge">THE VISIONARY</span>
+                <h1>Meet Saurav Jhawar</h1>
+                <p class="journey-text">
+                    The journey of Chill Thrive began with a simple observation: in a world that never stops moving, we have forgotten how to truly recover. Saurav founded this brand after discovering the profound impact of cold immersion on his own mental clarity.
+                </p>
+                <p class="vision-text">
+                    Our vision is to redefine wellness in Surat by making recovery as essential as the workout itself. We bridge the gap between rigorous recovery science and a premium lifestyle.
+                </p>
+            </div>
+        </section>
+
+        <section class="founder-quote-box">
+            <div class="quote-content">
+                <i class="fa-solid fa-quote-left"></i>
+                <h2>"Recovery is not a luxury; it is the foundation of resilience. At Chill Thrive, we help you reset so you can return stronger."</h2>
+            </div>
+        </section>
+
+        <section class="mission-bento-section">
+            <div class="bento-grid">
+                <div class="bento-card mission-main">
+                    <div class="card-icon"><i class="fa-solid fa-bullseye"></i></div>
+                    <h3>Our Mission</h3>
+                    <p>To provide Surat with a premium recovery experience that balances science and lifestyle, empowering every individual to reach their peak state.</p>
+                </div>
+                <div class="bento-card value-small">
+                    <div class="card-icon"><i class="fa-solid fa-microscope"></i></div>
+                    <h4>Scientific Excellence</h4>
+                    <p>Proven recovery protocols for real results.</p>
+                </div>
+                <div class="bento-card value-small">
+                    <div class="card-icon"><i class="fa-solid fa-shield-heart"></i></div>
+                    <h4>Mental Resilience</h4>
+                    <p>Building toughness through cold immersion.</p>
+                </div>
+                <div class="bento-card value-medium">
+                    <div class="card-icon"><i class="fa-solid fa-gem"></i></div>
+                    <h4>Premium Standards</h4>
+                    <p>We maintain medical-grade hygiene and elite service in every session, ensuring a safe and luxury reset for your body.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    </body>
+
+</html>

@@ -1,0 +1,302 @@
+<html>
+    <head>
+        <title>Cold Therapy</title>
+        <style>
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+            /* Universal Background & Text */
+            @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        body {
+            animation: fadeInPage 1s ease-out;
+        }
+body {
+    background-color: #f7f9fe; /* Very light ice tint */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2D3748;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+/* Section Headings */
+h1, h2 {
+    color: #1A365D; /* Navy Blue */
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+}
+            .about{
+                
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 80px 50px;
+                background-color: #E3F2FD;
+            }
+            .left-side, .right-side {
+                width: 45%;
+                margin-bottom: auto;
+            }
+            #book {
+                border-radius: 80px;
+                background-color: orange;
+                padding: 15px 30px;
+                border: none;
+                font-size: 17px;
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            }
+            .science {
+                display: flex; 
+                gap: 20px;
+                padding: 45px;
+                margin: 15px;
+            }
+
+            .card{
+    
+    background-color: #E3F2FD;
+    padding: 30px;            
+    border-radius: 20px;       
+    text-align: center;
+    flex: 1;                   
+    
+}
+/* --- Animation Definitions --- */
+
+/* Slide-In from the bottom */
+@keyframes slideUp {
+    from { 
+        opacity: 0; 
+        transform: translateY(50px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* Continuous Floating */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* --- Applying to your Science Cards --- */
+.card {
+    /* slideUp happens once (0.8s) | float repeats forever (3s) */
+    /* We add a 0.8s delay to 'float' so 'slideUp' can finish first */
+    animation: slideUp 0.8s ease-out forwards, 
+               float 3s ease-in-out infinite 0.8s;
+    
+    opacity: 0; /* Keeps card hidden until slideUp starts */
+}
+.card:hover{
+    background-color: white;
+    border-radius: 40px;
+    padding: 25px;
+    
+    transition: transform 0.3s ease ;
+  
+}
+.science-icon {
+    font-size: 40px;
+}
+
+.card h2{
+    color: #c58d2a;           
+}
+
+.difference{
+    display: flex;
+    gap: 25px;
+    padding: 25px;
+}
+
+.cold,.heat{
+    
+    padding: 30px;
+    text-align: center;
+    flex:1;
+    border-radius: 25px;
+}
+
+
+.disclaimer{
+    display: flex;
+    border-left: 8px solid #f56565;
+    border-color: red;
+    border-radius: 25px;
+    flex-direction: column;
+    background-color:#E3F2FD;
+    padding: 25px;
+    margin-top: 90px;
+    margin-bottom: 90px;
+}
+/* Base styles for both cards */
+.cold, .heat {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                box-shadow 0.3s ease, 
+                border-color 0.3s ease;
+    border: 2px solid transparent; /* Prevents jumping when border appears */
+    border-radius: 45px;
+}
+
+/* ONLY the cold card zooms when pointed at */
+.cold:hover {
+    transform: scale(1.1);
+    box-shadow: 0 15px 30px rgba(53, 116, 233, 0.2);
+    border-color: #3574E9; /* Your Navy Blue */
+}
+
+/* ONLY the heat card zooms when pointed at */
+.heat:hover {
+    transform: scale(1.1);
+    box-shadow: 0 15px 30px rgba(241, 138, 74, 0.2);
+    border-color: #F18A4A; /* Your Thrive Orange */
+}
+/* Container for the whole section */
+.myths {
+    padding: 50px;
+    margin-top: 20px;
+}
+
+/* Myth Styling (The Question) */
+.myths h2 {
+    background-color: #FFF5F5; /* Light Red */
+    color: #C53030; /* Deep Red */
+    padding: 15px 25px;
+    border-left: 6px solid #F56565;
+    border-radius: 0 15px 15px 0;
+    font-size: 1.2rem;
+    margin-top: 30px;
+}
+
+/* Fact Styling (The Answer) */
+.myths h3 {
+    background-color: #E6FFFA; /* Light Teal/Green */
+    color: #234E52; /* Deep Teal */
+    padding: 20px 30px;
+    border-left: 6px solid #38B2AC;
+    border-radius: 0 15px 15px 0;
+    font-size: 1.1rem;
+    font-weight: normal;
+    margin-left: 40px; /* Staggers it to the right */
+    transition: transform 3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Member 2 Interaction: Fact pops out when reading */
+.myths h3:hover {
+    transform: scale(1.02) translateX(10px);
+    box-shadow: 0 10px 20px rgba(56, 178, 172, 0.1);
+}
+
+            
+        </style>    
+    </head>
+    <body>
+        <section class="about">
+            <div class="left-side">
+                <span class="top"> Discover the power of cold therapy.</span>
+                <h1> What is Cold Therapy? </h1>
+            </div>
+            <div class="right-side">
+                <p style="font-size: 23px;">  Cold therapy (also called cryotherapy) is a natural method of using cold temperatures to help the body heal, relax, and recover. It includes ice packs, cold showers, ice baths, and cold plunge therapy.</p>
+                <p style="font-size: 23px;">     At Chill Thrive, cold therapy mainly means ice bath or cold water immersion for physical and mental recovery. Our specialized sessions, lasting between 30 to 60 minutes,help you fully recharge and recover.</p>
+                
+                <button id="book">BOOK NOW</button>
+            </div>
+        </section>
+        <br><br>
+<section id="science-section">
+    <h2 class="section-title" style="text-align: center; font-size: 30px;">The Science Behind the Chill</h2>
+    
+    <div class="science">
+        <div class="card">
+            
+            <span class="science-icon">❄️</span>
+            <h2> Vasoconstriction</h2>
+            <p>Cold constricts blood vessels, reducing blood flow to muscles, which limits inflammation, swelling, and tissue breakdown after intense exercise.</p>
+        </div>
+
+        <div class="card">
+            <span class="science-icon">🩹</span>
+            <h2>Reduced Inflammation</h2>
+            <p>Exposure to cold water slows down the chemical processes that cause swelling and tissue breakdown after intense physical activity. This significantly reduces "Delayed Onset Muscle Soreness" (DOMS), allowing you to recover faster and return to your training with less pain.</p>
+        </div>
+
+        <div class="card">
+            <span class="science-icon">🧠</span>
+            <h2>The Happy Hormone</h2>
+            <p>Exposure to cold triggers a massive release of dopamine and endorphins, boosting your mood instantly.</p>
+        </div>
+        <div class="card">
+            <span class="science-icon"> 🔥</span>
+            <h2> Metabolic Boost </h2>
+            <p> Exposure to cold stimulates the production of "Brown Fat," a type of tissue that burns calories to generate body heat. This process increases your overall metabolic rate and can help improve insulin sensitivity and long-term weight management. </p>
+    </div>
+    
+</section>
+<section>
+    <h2 style="text-align: center; font-size: 30px;">Heat VS Cold Therapy</h2>
+    <div class="difference">
+    <div class="cold" style="background-color: #E3F2FD;">
+        <h2 style="color: #c58d2a; font-size: 24px;">Cold Therapy</h2>
+        <ul style="font-size: 22px;">
+            <li>Uses "Cryotherapy" to rapidly reduce the body's internal temperature and calm the nervous system.</li><br>
+            <li>Best for immediate post-workout recovery, acute injuries with swelling, or when you need a mental "reset" and energy boost.</li><br>
+            <li>It triggers Vasoconstriction, which constricts blood vessels to flush out metabolic waste and dramatically lowers inflammation in muscle tissue.</li><br>
+            <li> Decreases inflammation, numbs pain, prevents muscle spasms, reduces swelling.</li>
+        </ul>
+    </div>
+    <div class="heat" style="background-color: #FFF3E0;">
+        <h2 style="color: #c58d2a; font-size: 24px;">Heat Therapy</h2>
+        <ul style="font-size: 22px;">
+            <li>Uses "Thermotherapy" to warm the body, increase heart rate, and promote deep physical relaxation.</li><br>
+            <li>Ideal for chronic muscle stiffness, warming up before a workout, or relaxing tight joints after a long day of work.</li><br>
+            <li>It triggers Vasodilation, which opens up blood vessels to increase circulation and deliver a surge of healing nutrients to your muscles.</li><br>
+            <li>Relaxes muscles, reduces stiffness, improves flexibility, promotes healing, eases chronic aches.</li>
+        </ul>
+
+    </div>
+</div>
+</section>
+<div class="disclaimer">
+    <h2 style="color: red; text-align: center; font-size: 30px;">⚠️Who Should Avoid Ice Baths?</h2>
+    <p style="font-size: 25px;"> While cold therapy has many benefits, it is not suitable for everyone. Please consult a doctor if you have:</p>
+    <ul style="color: grey; font-size: 22px;">
+        <li><b>Heart Conditions : </b>Sudden cold causes a spike in heart rate that can strain a sensitive heart.</li><br>
+        <li><b>Circulatory Issues : </b>For people with conditions like Raynaud’s, the extreme cold can make blood vessels tighten too much, causing painful numbness or tingling in your hands and feet.</li><br>
+        <li><b>Pregnancy : </b>The body’s natural "cold shock" can change how blood flows to the baby, so it is important to consult a doctor first.</li><br>
+        <li><b>Diabetes : </b>If you have nerve damage from diabetes, you might not feel how cold the water really is, which could lead to skin irritation without you realizing it.</li><br>
+        <li><b>Fever or Open Wounds : </b>You should skip the plunge if you are currently sick with a fever or have a cut that hasn't fully healed yet</li>
+    </ul>
+</div>
+<br>
+<section class="myths">
+    <h1 style="text-align: center;">Some Myths and Facts</h2>
+    <h2><b>Myth 1 :</b> "The colder the water, the better the results."</h3>
+    <h3>Fact : The ideal temperature for recovery is usually between 10°C and 15°C.<br><br>
+        Going too cold (near freezing) can cause excessive stress on the heart and may actually hinder muscle protein synthesis.</h3>
+    <h2><b>Myth 2:</b> "Ice baths are only for professional athletes."</h2>
+    <h3>Fact : Cold therapy is beneficial for anyone looking to reduce stress, improve sleep, or boost mental clarity.<br><br>
+ While athletes use it for muscle repair, the "happy hormone" release helps students and professionals manage daily anxiety.
+ <h2><b>Myth 3 :</b> "Ice baths burn a massive amount of fat instantly."</h2>
+ <h3>Fact : While cold exposure activates Brown Fat to burn calories for heat, it is a tool for metabolic health, not a "magic" weight loss pill.<br><br>
+ It works best when combined with a healthy diet and regular exercise to improve insulin sensitivity.
+   <h2><b>Myth 4 :</b>"They Replace Proper Recovery (Sleep, Nutrition)."
+   <h3>Fact :Ice baths are a tool, not a cure-all. They support recovery but cannot substitute for essential rest, sleep, nutrition, hydration, or stretching. </h3>
+   <h2><b>Myth 5 :</b>"Always Beneficial Immediately After Strength Training."
+   <h3>Fact : Some studies suggest icing after weightlifting reduces blood flow, potentially blunting muscle growth; it might be better post-endurance or later in the day for sleep. </h3>
+   <h2><b>Myth 6 :</b> "They Are Dangerous (for everyone)."</h2>
+   <h3>Fact : While they carry risks (cold shock, hypothermia), short, controlled sessions are generally safe and beneficial for most. Consult a doctor if you have pre-existing conditions. </h3>
+</section>
+
+    </body>
+    </html>
+
+</ul>

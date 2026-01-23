@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+    .testimonials-section {
+    padding: 80px 10%;
+    background-color: #ffffff; /* Keeping it white as requested */
+    text-align: center;
+}
+/* Background for the entire section */
+.testimonials-section {
+    padding: 100px 10%;
+    /* A soft gradient from Ice Blue to White */
+    background: linear-gradient(135deg, #E3F2FD 0%, #ffffff 100%); 
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decorative Background Blobs - Makes it look modern/not simple */
+.testimonials-section::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    right: -5%;
+    width: 400px;
+    height: 400px;
+    background: rgba(241, 138, 74, 0.05); /* Very faint Thrive Orange */
+    border-radius: 50%;
+    z-index: 0;
+}
+
+/* The Glassmorphism Card */
+.testimonial-card {
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.03);
+    transition: all 0.4s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 30px 60px rgba(53, 116, 233, 0.1);
+    background: #ffffff; /* Turns solid white on hover */
+}
+.testimonial-card::after {
+    content: '"';
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 8rem;
+    font-family: 'Playfair Display', serif;
+    color: #E3F2FD; /* Your signature Ice Blue */
+    opacity: 0.4;
+    line-height: 1;
+    z-index: -1;
+}
+.client-name {
+    font-family: 'Playfair Display', serif; /* Elegant font for the name */
+    font-size: 1.3rem;
+    color: #1A365D; /* Navy Blue */
+    margin-bottom: 5px;
+    display: block;
+}
+
+.stars {
+    color: #F18A4A; /* Thrive Orange */
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.feedback {
+    line-height: 1.8;
+    color: #4A5568;
+    font-size: 1.05rem;
+    font-weight: 300; /* Light weight looks more premium */
+}
+.testimonial-header h2 {
+    font-size: 2.5rem;
+    color: #1A365D;
+    margin: 15px 0 50px;
+}
+
+.testimonial-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* Card Base */
+.testimonial-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-10px);
+}
+
+/* Text Card Specifics */
+.stars {
+    color: #F18A4A; /* Thrive Orange */
+    margin-bottom: 15px;
+}
+
+.feedback {
+    font-style: italic;
+    line-height: 1.6;
+    color: #4A5568;
+    margin-bottom: 15px;
+}
+
+.client-name {
+    color: #1A365D;
+    font-weight: bold;
+}
+
+
+. {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+
+
+
+</style>
+</head>
+<body>
+    <section class="testimonials-section">
+    <div class="testimonial-header">
+        <span class="badge">TESTIMONIALS</span>
+        <h2>What Our Community Says</h2>
+    </div>
+
+    <div class="testimonial-card text-card">
+    <div class="user-info">
+        <h4 class="client-name">Avi Singhal</h4>
+    </div>
+    
+    <div class="stars">
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+    </div>
+    
+    <p class="feedback">"Chill Thrives gives Amazing Chill Vibes!!! Chill Thrive in Surat is an amazing place for chilled Ice Bath Sessions. Every session gives you amazing recovery from pains or muscle recovery!"</p>
+</div>
+
+    <div class="testimonial-card text-card">
+        <div class="user-info">
+            
+            <h4 class="client-name">Pankti Shah</h4>
+        </div>
+         <div class="stars">
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+    </div>
+        <p class="feedback">"I had a great experience! The place is clean, hygienic, and very well maintained. Saurav is polite and informative. A perfect place for recovery and self-care."</p>
+    </div>
+
+    <div class="testimonial-card text-card">
+        <div class="user-info">
+            
+            <h4 class="client-name">Kunal Soni</h4>
+        </div>
+         <div class="stars">
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+    </div>
+        <p class="feedback">"Amazing experience! The staff were professional and explained everything clearly. Helped reduce my muscle soreness significantly. Highly recommend!"</p>
+    </div>
+    <div class="testimonial-card text-card">
+        <div class="user-info">
+            
+            <h4 class="client-name">Meet Ahir</h4>
+        </div>
+         <div class="stars">
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+    </div>
+        <p class="feedback">"I had an incredible experience at the ice bath centre! From the moment I walked in, the atmosphere was calm, clean, and welcoming. The staff was professional and guided me through the entire process, making sure I felt comfortable and informed. ☺️"</p>
+    </div>
+    <div class="testimonial-card text-card">
+        <div class="user-info">
+            
+            <h4 class="client-name">Rohit Taparia</h4>
+        </div>
+        <div class="stars">
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+    </div>
+        <p class="feedback">"Had a wonderful experience I think this is one of the most rejuvenating way of reliving stress....I think one should try once atleast and experience it ..."</p>
+    </div>
+    <div class="testimonial-card text-card">
+        <div class="user-info">
+            
+            <h4 class="client-name">Jainam Shah</h4>
+        </div>
+        <div class="stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+        </div>
+        <p class="feedback">"As someone who trains regularly, I’ve tried many recovery methods — and ice therapy here has been a game-changer. My muscles feel lighter, and recovery time has improved. The staff make you feel comfortable throughout the session. Totally worth it!"</p>
+    </div>
+    <div class="testimonial-card text-card">
+        <div class="user-info">
+        
+            <h4 class="client-name">Brayan Dialle</h4>
+        </div>
+        <div class="stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+        </div>
+        <p class="feedback">"As someone who trains regularly, I’ve tried many recovery methods — and ice therapy here has been a game-changer. My muscles feel lighter, and recovery time has improved. The staff make you feel comfortable throughout the session. Totally worth it!"</p>
+    </div>"</p>
+    </div>
+
+
+</div>
+            
+
+</section>
+</body>
+</html>
+

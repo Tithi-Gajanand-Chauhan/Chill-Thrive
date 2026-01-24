@@ -1,0 +1,1898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Chill Thrive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #0A4F7D;
+            --light-blue: #2E8BC0;
+            --ice-blue: #E8F4F8;
+            --accent: #64B5D9;
+            --white: #FFFFFF;
+            --dark: #0D1B2A;
+            --gray: #4A5568;
+            --gradient-1: linear-gradient(135deg, #0A4F7D 0%, #1B6FA8 50%, #2E8BC0 100%);
+            --gradient-2: linear-gradient(180deg, rgba(10,79,125,0.95) 0%, rgba(46,139,192,0.9) 100%);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            overflow-x: hidden;
+            background: var(--white);
+        }
+
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            inset: 0;
+            background: var(--dark);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            color: white;
+            letter-spacing: 0.3em;
+            overflow: hidden;
+        }
+
+        .preloader-text span {
+            display: inline-block;
+            animation: revealText 0.8s ease forwards;
+            opacity: 0;
+            transform: translateY(100%);
+        }
+
+        @keyframes revealText {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.5s ease;
+        }
+
+        .nav.scrolled {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            padding: 15px 5%;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.08);
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
+            font-weight: 500;
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav.scrolled .nav-logo {
+            color: var(--primary-blue);
+        }
+
+        /* BOOKING LINK: Add your booking page URL to the href below */
+        .nav-cta {
+            padding: 10px 20px;
+            background: transparent;
+            border: 1.5px solid rgba(255,255,255,0.6);
+            color: white;
+            font-size: clamp(0.65rem, 2vw, 0.8rem);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Inter', sans-serif;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav.scrolled .nav-cta {
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        .nav-cta:hover {
+            background: white;
+            color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        .nav.scrolled .nav-cta:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: var(--gradient-1);
+        }
+
+        .hero-bg-shapes {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+        }
+
+        .shape-1 {
+            width: clamp(300px, 50vw, 600px);
+            height: clamp(300px, 50vw, 600px);
+            background: radial-gradient(circle, rgba(100,181,217,0.6) 0%, transparent 70%);
+            top: -100px;
+            right: -50px;
+            animation: floatShape 20s ease-in-out infinite;
+        }
+
+        .shape-2 {
+            width: clamp(250px, 40vw, 500px);
+            height: clamp(250px, 40vw, 500px);
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            bottom: -100px;
+            left: -50px;
+            animation: floatShape 25s ease-in-out infinite reverse;
+        }
+
+        .shape-3 {
+            width: clamp(150px, 25vw, 300px);
+            height: clamp(150px, 25vw, 300px);
+            background: radial-gradient(circle, rgba(46,139,192,0.5) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            animation: floatShape 15s ease-in-out infinite;
+        }
+
+        @keyframes floatShape {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -30px) scale(1.1); }
+            50% { transform: translate(-20px, 20px) scale(0.95); }
+            75% { transform: translate(20px, 10px) scale(1.05); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50px;
+            margin-bottom: 30px;
+            font-size: clamp(0.7rem, 2vw, 0.85rem);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease 0.3s forwards;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.5); }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 10vw, 8rem);
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+            line-height: 1;
+            opacity: 0;
+            animation: heroTitle 1.2s ease 0.5s forwards;
+        }
+
+        @keyframes heroTitle {
+            from {
+                opacity: 0;
+                transform: translateY(80px);
+                letter-spacing: 0.1em;
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                letter-spacing: -0.02em;
+            }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(0.85rem, 2.5vw, 1.4rem);
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.8s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeInUp 1s ease 1.2s forwards;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, white, transparent);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: white;
+            animation: scrollDown 2s ease infinite;
+        }
+
+        @keyframes scrollDown {
+            0% { transform: translateY(-20px); }
+            100% { transform: translateY(60px); }
+        }
+
+        /* Section Intro */
+        .services-intro {
+            padding: clamp(80px, 15vw, 180px) 5% clamp(60px, 10vw, 120px);
+            text-align: center;
+            background: var(--white);
+            position: relative;
+        }
+
+        .intro-decoration {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--light-blue), transparent);
+        }
+
+        .services-intro h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 5vw, 4rem);
+            font-weight: 300;
+            margin-bottom: 25px;
+            color: var(--dark);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .services-intro h2.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .services-intro h2 span {
+            color: var(--light-blue);
+            font-style: italic;
+        }
+
+        .services-intro p {
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+            padding: 0 10px;
+        }
+
+        .services-intro p.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Service Cards with Navigation Buttons */
+        .services-container {
+            padding: 60px 0 100px;
+            background: linear-gradient(180deg, var(--white) 0%, var(--ice-blue) 100%);
+            position: relative;
+        }
+
+        .services-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .services-header h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.4rem, 4vw, 2.5rem);
+            font-weight: 400;
+            color: var(--dark);
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            width: clamp(45px, 10vw, 55px);
+            height: clamp(45px, 10vw, 55px);
+            border: 1.5px solid var(--primary-blue);
+            background: transparent;
+            color: var(--primary-blue);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .nav-btn:disabled:hover {
+            background: transparent;
+            color: var(--primary-blue);
+        }
+
+        .nav-btn svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-btn:hover:not(:disabled) svg {
+            transform: scale(1.1);
+        }
+
+        .nav-btn.prev-btn:hover:not(:disabled) svg {
+            transform: translateX(-3px);
+        }
+
+        .nav-btn.next-btn:hover:not(:disabled) svg {
+            transform: translateX(3px);
+        }
+
+        .services-track-wrapper {
+            overflow: hidden;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        .services-track {
+            display: flex;
+            gap: clamp(20px, 4vw, 40px);
+            padding: 0 5%;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+
+        .service-card {
+            flex: 0 0 clamp(280px, 85vw, 420px);
+            background: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(10,79,125,0.1);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 40px 80px rgba(10,79,125,0.2);
+        }
+
+        .service-card-image {
+            position: relative;
+            height: clamp(200px, 40vw, 300px);
+            overflow: hidden;
+        }
+
+        .service-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .service-card:hover .service-card-image img {
+            transform: scale(1.15);
+        }
+
+        .service-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-2);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .service-card:hover .service-card-overlay {
+            opacity: 1;
+        }
+
+        .overlay-content {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            transform: translateY(30px);
+            opacity: 0;
+            transition: all 0.5s ease 0.1s;
+        }
+
+        .service-card:hover .overlay-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .overlay-content .benefits-list {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .overlay-content .benefits-list li {
+            padding: 6px 0;
+            font-size: clamp(0.8rem, 2vw, 0.95rem);
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .overlay-content .benefits-list li:last-child {
+            border-bottom: none;
+        }
+
+        .service-card-number {
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 300;
+            color: white;
+            opacity: 0.3;
+            line-height: 1;
+        }
+
+        .service-card-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: white;
+            color: var(--primary-blue);
+            padding: 8px 15px;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+        }
+
+        .service-card-content {
+            padding: clamp(25px, 5vw, 40px) clamp(20px, 4vw, 35px);
+        }
+
+        .service-card-icon {
+            width: clamp(35px, 8vw, 50px);
+            height: clamp(35px, 8vw, 50px);
+            margin-bottom: 20px;
+        }
+
+        .service-card-icon svg {
+            width: 100%;
+            height: 100%;
+            stroke: var(--light-blue);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .service-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
+            font-weight: 400;
+            color: var(--dark);
+            margin-bottom: 12px;
+        }
+
+        .service-card-desc {
+            font-size: clamp(0.85rem, 2vw, 0.95rem);
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .service-card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0,0,0,0.08);
+        }
+
+        .service-duration {
+            font-size: clamp(0.75rem, 2vw, 0.85rem);
+            color: var(--gray);
+        }
+
+        .service-duration span {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        /* BOOKING LINK: Add your booking page URL to the href of these buttons */
+        .service-card-btn {
+            width: clamp(40px, 10vw, 50px);
+            height: clamp(40px, 10vw, 50px);
+            border: 1.5px solid var(--primary-blue);
+            background: transparent;
+            color: var(--primary-blue);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .service-card-btn:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .service-card-btn svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card-btn:hover svg {
+            transform: translateX(3px);
+        }
+
+        /* Progress Dots */
+        .progress-dots {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 30px 5% 0;
+        }
+
+        .progress-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(10,79,125,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .progress-dot.active {
+            background: var(--primary-blue);
+            transform: scale(1.2);
+        }
+
+        .progress-dot:hover {
+            background: var(--light-blue);
+        }
+
+        /* Featured Service */
+        .featured-service {
+            padding: 0;
+            background: var(--dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 100vh;
+        }
+
+        .featured-image {
+            position: relative;
+            overflow: hidden;
+            min-height: 300px;
+        }
+
+        .featured-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.1);
+            transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .featured-service.in-view .featured-image img {
+            transform: scale(1);
+        }
+
+        .featured-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, var(--dark) 0%, transparent 50%);
+        }
+
+        .featured-content {
+            padding: clamp(40px, 8vw, 100px) clamp(25px, 5vw, 80px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .featured-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--accent);
+            font-size: clamp(0.7rem, 2vw, 0.8rem);
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            margin-bottom: 30px;
+        }
+
+        .featured-label::before {
+            content: '';
+            width: 30px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .featured-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 4.5rem);
+            font-weight: 300;
+            color: white;
+            margin-bottom: 25px;
+            line-height: 1.1;
+        }
+
+        .featured-title span {
+            display: block;
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .featured-desc {
+            font-size: clamp(0.95rem, 2vw, 1.15rem);
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+            margin-bottom: 40px;
+            max-width: 500px;
+        }
+
+        .featured-benefits {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .featured-benefit {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+            font-size: clamp(0.8rem, 2vw, 0.95rem);
+        }
+
+        .featured-benefit-icon {
+            width: clamp(35px, 8vw, 45px);
+            height: clamp(35px, 8vw, 45px);
+            border: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .featured-benefit-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--accent);
+            fill: none;
+        }
+
+        /* BOOKING LINK: Add your booking page URL to the href below */
+        .featured-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: clamp(15px, 3vw, 22px) clamp(30px, 5vw, 45px);
+            background: white;
+            color: var(--dark);
+            font-size: clamp(0.75rem, 2vw, 0.85rem);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            width: fit-content;
+        }
+
+        .featured-cta svg {
+            width: 18px;
+            height: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .featured-cta:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateX(10px);
+        }
+
+        .featured-cta:hover svg {
+            transform: translateX(5px);
+        }
+
+        /* Combo Packages */
+        .combo-section {
+            padding: clamp(80px, 12vw, 150px) 5%;
+            background: var(--white);
+            position: relative;
+        }
+
+        .combo-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--light-blue), transparent);
+        }
+
+        .combo-header {
+            text-align: center;
+            margin-bottom: clamp(50px, 10vw, 100px);
+        }
+
+        .combo-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 5vw, 3.5rem);
+            font-weight: 300;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        .combo-header h2 span {
+            color: var(--light-blue);
+            font-style: italic;
+        }
+
+        .combo-header p {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 10px;
+        }
+
+        .combo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: clamp(20px, 3vw, 30px);
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .combo-card {
+            background: white;
+            border: 1px solid rgba(10,79,125,0.1);
+            padding: clamp(30px, 5vw, 50px) clamp(25px, 4vw, 40px);
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        .combo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .combo-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .combo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(10,79,125,0.15);
+            border-color: transparent;
+        }
+
+        .combo-card.popular {
+            background: var(--dark);
+            border-color: transparent;
+        }
+
+        .combo-card.popular::before {
+            background: var(--accent);
+            transform: scaleX(1);
+        }
+
+        .combo-popular-badge {
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--accent);
+            color: white;
+            padding: 6px 40px;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            transform: rotate(45deg);
+        }
+
+        .combo-icon {
+            width: clamp(50px, 10vw, 70px);
+            height: clamp(50px, 10vw, 70px);
+            border: 1px solid rgba(10,79,125,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            transition: all 0.4s ease;
+        }
+
+        .combo-card:hover .combo-icon {
+            background: var(--ice-blue);
+            border-color: var(--light-blue);
+        }
+
+        .combo-card.popular .combo-icon {
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .combo-card.popular:hover .combo-icon {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--accent);
+        }
+
+        .combo-icon svg {
+            width: clamp(20px, 5vw, 30px);
+            height: clamp(20px, 5vw, 30px);
+            stroke: var(--light-blue);
+            fill: none;
+        }
+
+        .combo-card.popular .combo-icon svg {
+            stroke: var(--accent);
+        }
+
+        .combo-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.3rem, 3vw, 1.6rem);
+            font-weight: 400;
+            color: var(--dark);
+            margin-bottom: 12px;
+        }
+
+        .combo-card.popular .combo-title {
+            color: white;
+        }
+
+        .combo-includes {
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            color: var(--gray);
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .combo-card.popular .combo-includes {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .combo-pricing {
+            margin-bottom: 30px;
+        }
+
+        .combo-price {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            font-weight: 400;
+            color: var(--dark);
+        }
+
+        .combo-card.popular .combo-price {
+            color: white;
+        }
+
+        .combo-original {
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            color: #999;
+            text-decoration: line-through;
+            margin-left: 10px;
+        }
+
+        .combo-savings {
+            display: inline-block;
+            background: rgba(46,139,192,0.1);
+            color: var(--light-blue);
+            padding: 4px 12px;
+            font-size: clamp(0.65rem, 1.5vw, 0.75rem);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 8px;
+        }
+
+        .combo-card.popular .combo-savings {
+            background: rgba(100,181,217,0.2);
+            color: var(--accent);
+        }
+
+        /* BOOKING LINK: Add your booking page URL to the href of these buttons */
+        .combo-btn {
+            width: 100%;
+            padding: clamp(14px, 3vw, 18px);
+            background: transparent;
+            border: 1.5px solid var(--primary-blue);
+            color: var(--primary-blue);
+            font-size: clamp(0.7rem, 2vw, 0.8rem);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Inter', sans-serif;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+
+        .combo-btn:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .combo-card.popular .combo-btn {
+            border-color: white;
+            color: white;
+        }
+
+        .combo-card.popular .combo-btn:hover {
+            background: white;
+            color: var(--dark);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            position: relative;
+            padding: clamp(100px, 15vw, 200px) 5%;
+            background: var(--gradient-1);
+            overflow: hidden;
+        }
+
+        .cta-shapes {
+            position: absolute;
+            inset: 0;
+        }
+
+        .cta-shape {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .cta-shape-1 {
+            width: clamp(300px, 50vw, 600px);
+            height: clamp(300px, 50vw, 600px);
+            top: -150px;
+            right: -100px;
+            animation: rotate 40s linear infinite;
+        }
+
+        .cta-shape-2 {
+            width: clamp(200px, 35vw, 400px);
+            height: clamp(200px, 35vw, 400px);
+            bottom: -100px;
+            left: -50px;
+            animation: rotate 30s linear infinite reverse;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .cta-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            color: rgba(255,255,255,0.8);
+            font-size: clamp(0.7rem, 2vw, 0.85rem);
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            margin-bottom: 30px;
+        }
+
+        .cta-label::before,
+        .cta-label::after {
+            content: '';
+            width: clamp(30px, 8vw, 50px);
+            height: 1px;
+            background: rgba(255,255,255,0.3);
+        }
+
+        .cta-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 6vw, 4.5rem);
+            font-weight: 300;
+            color: white;
+            margin-bottom: 25px;
+            line-height: 1.1;
+        }
+
+        .cta-content p {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 50px;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* BOOKING LINK: Add your booking page URL to the href below */
+        .cta-btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: clamp(16px, 3vw, 22px) clamp(30px, 5vw, 50px);
+            background: white;
+            color: var(--primary-blue);
+            font-size: clamp(0.75rem, 2vw, 0.85rem);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .cta-btn-primary svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+        }
+
+        .cta-btn-primary:hover svg {
+            transform: translateX(5px);
+        }
+
+        .cta-btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: clamp(16px, 3vw, 22px) clamp(30px, 5vw, 50px);
+            background: transparent;
+            border: 1.5px solid rgba(255,255,255,0.5);
+            color: white;
+            font-size: clamp(0.75rem, 2vw, 0.85rem);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .cta-btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: white;
+            transform: translateY(-5px);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            padding: clamp(50px, 8vw, 80px) 5% clamp(30px, 5vw, 40px);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: clamp(15px, 4vw, 40px);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            color: rgba(255,255,255,0.4);
+            font-size: clamp(0.75rem, 2vw, 0.85rem);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .featured-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-image {
+                height: 50vh;
+                min-height: 300px;
+            }
+
+            .featured-image::after {
+                background: linear-gradient(0deg, var(--dark) 0%, transparent 50%);
+            }
+
+            .combo-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .featured-benefits {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .combo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .combo-card.popular {
+                order: -1;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-btn-primary,
+            .cta-btn-secondary {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .scroll-indicator {
+                bottom: 25px;
+            }
+
+            .scroll-line {
+                height: 40px;
+            }
+
+            .services-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-buttons {
+                align-self: flex-end;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav {
+                padding: 15px 4%;
+            }
+
+            .nav.scrolled {
+                padding: 12px 4%;
+            }
+
+            .hero-badge {
+                padding: 8px 15px;
+                margin-bottom: 20px;
+            }
+
+            .service-card {
+                flex: 0 0 90vw;
+            }
+
+            .combo-popular-badge {
+                font-size: 0.55rem;
+                padding: 5px 35px;
+                right: -25px;
+                top: 15px;
+            }
+        }
+
+        /* Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-text">
+            <span style="animation-delay: 0.1s">C</span>
+            <span style="animation-delay: 0.15s">H</span>
+            <span style="animation-delay: 0.2s">I</span>
+            <span style="animation-delay: 0.25s">L</span>
+            <span style="animation-delay: 0.3s">L</span>
+            <span style="animation-delay: 0.4s"> </span>
+            <span style="animation-delay: 0.45s">T</span>
+            <span style="animation-delay: 0.5s">H</span>
+            <span style="animation-delay: 0.55s">R</span>
+            <span style="animation-delay: 0.6s">I</span>
+            <span style="animation-delay: 0.65s">V</span>
+            <span style="animation-delay: 0.7s">E</span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="#" class="nav-logo">Chill Thrive</a>
+        <!-- BOOKING LINK: Replace # with your booking page URL -->
+        <a href="#" class="nav-cta">Book Session</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">Premium Recovery</div>
+            <h1>Our Services</h1>
+            <p class="hero-subtitle">Science-backed recovery for body & mind</p>
+        </div>
+        <div class="scroll-indicator">
+            <span>Explore</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Services Intro -->
+    <section class="services-intro">
+        <div class="intro-decoration"></div>
+        <h2>Where Recovery Meets <span>Resilience</span></h2>
+        <p>Experience the transformative power of cold and heat therapy. Each service is carefully designed to enhance your physical recovery, sharpen your mental focus, and elevate your overall wellbeing.</p>
+    </section>
+
+    <!-- Services with Navigation Buttons -->
+    <section class="services-container" id="servicesSection">
+        <div class="services-header">
+            <h3>Signature Therapies</h3>
+            <div class="nav-buttons">
+                <button class="nav-btn prev-btn" id="prevBtn" disabled>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <button class="nav-btn next-btn" id="nextBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="services-track-wrapper">
+            <div class="services-track" id="servicesTrack">
+                <!-- Ice Bath -->
+                <div class="service-card">
+                    <div class="service-card-image">
+                        <img src="icebath.jpg" alt="Ice Bath Therapy">
+                        <div class="service-card-number">01</div>
+                        <div class="service-card-overlay">
+                            <div class="overlay-content">
+                                <ul class="benefits-list">
+                                    <li>Accelerated Muscle Recovery</li>
+                                    <li>Reduced Inflammation</li>
+                                    <li>Enhanced Mental Focus</li>
+                                    <li>Improved Stress Response</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-card-content">
+                        <div class="service-card-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L14.5 8.5L21 9.5L16.5 14.5L17.5 21L12 17.5L6.5 21L7.5 14.5L3 9.5L9.5 8.5L12 2Z"/>
+                            </svg>
+                        </div>
+                        <h4 class="service-card-title">Ice Bath Therapy</h4>
+                        <p class="service-card-desc">Cold immersion therapy designed to reduce inflammation and enhance mental toughness.</p>
+                        <div class="service-card-meta">
+                            <div class="service-duration">Duration: <span>30-60 min</span></div>
+                            <!-- BOOKING LINK: Replace # with your booking page URL -->
+                            <a href="booking.html" class="service-card-btn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Jacuzzi -->
+                <div class="service-card">
+                    <div class="service-card-image">
+                        <img src="jacuzzi.jpg" alt="Jacuzzi Therapy">
+                        <div class="service-card-number">02</div>
+                        <div class="service-card-overlay">
+                            <div class="overlay-content">
+                                <ul class="benefits-list">
+                                    <li>Deep Muscle Relaxation</li>
+                                    <li>Improved Blood Circulation</li>
+                                    <li>Joint Pain Relief</li>
+                                    <li>Stress Reduction</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-card-content">
+                        <div class="service-card-icon">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                                <line x1="9" y1="9" x2="9.01" y2="9"/>
+                                <line x1="15" y1="9" x2="15.01" y2="9"/>
+                            </svg>
+                        </div>
+                        <h4 class="service-card-title">Jacuzzi Therapy</h4>
+                        <p class="service-card-desc">Warm hydrotherapy for muscle relaxation and nervous system restoration.</p>
+                        <div class="service-card-meta">
+                            <div class="service-duration">Duration: <span>45-60 min</span></div>
+                            <!-- BOOKING LINK: Replace # with your booking page URL -->
+                            <a href="booking.html" class="service-card-btn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Steam Bath -->
+                <div class="service-card">
+                    <div class="service-card-image">
+                        <img src="steambath.jpg" alt="Steam Bath">
+                        <div class="service-card-number">03</div>
+                        <div class="service-card-badge">Popular</div>
+                        <div class="service-card-overlay">
+                            <div class="overlay-content">
+                                <ul class="benefits-list">
+                                    <li>Full Body Detoxification</li>
+                                    <li>Skin Rejuvenation</li>
+                                    <li>Respiratory Health</li>
+                                    <li>Mental Clarity</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-card-content">
+                        <div class="service-card-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2v4M6 4l2 2M18 4l-2 2M4 12h4M16 12h4M6 20l2-2M18 20l-2-2M12 18v4"/>
+                            </svg>
+                        </div>
+                        <h4 class="service-card-title">Steam Bath</h4>
+                        <p class="service-card-desc">Detoxifying heat therapy for relaxation and respiratory wellness.</p>
+                        <div class="service-card-meta">
+                            <div class="service-duration">Duration: <span>30-45 min</span></div>
+                            <!-- BOOKING LINK: Replace # with your booking page URL -->
+                            <a href="booking.html" class="service-card-btn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contrast Therapy -->
+                <div class="service-card">
+                    <div class="service-card-image">
+                        <img src="contrasttherapy.jpg" alt="Contrast Therapy">
+                        <div class="service-card-number">04</div>
+                        <div class="service-card-overlay">
+                            <div class="overlay-content">
+                                <ul class="benefits-list">
+                                    <li>Vascular Training</li>
+                                    <li>Enhanced Recovery</li>
+                                    <li>Immune Boost</li>
+                                    <li>Energy Increase</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-card-content">
+                        <div class="service-card-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 3v18M3 12h18"/>
+                                <circle cx="12" cy="12" r="9"/>
+                            </svg>
+                        </div>
+                        <h4 class="service-card-title">Contrast Therapy</h4>
+                        <p class="service-card-desc">Alternating hot and cold for optimal circulatory benefits.</p>
+                        <div class="service-card-meta">
+                            <div class="service-duration">Duration: <span>45-60 min</span></div>
+                            <!-- BOOKING LINK: Replace # with your booking page URL -->
+                            <a href="booking.html" class="service-card-btn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="progress-dots" id="progressDots">
+            <div class="progress-dot active" data-index="0"></div>
+            <div class="progress-dot" data-index="1"></div>
+            <div class="progress-dot" data-index="2"></div>
+            <div class="progress-dot" data-index="3"></div>
+        </div>
+    </section>
+
+    <!-- Featured Service -->
+    <section class="featured-service" id="featuredService">
+        <div class="featured-grid">
+            <div class="featured-image">
+                <img src="contrasttherapy.jpg" alt="Full Recovery Combo">
+            </div>
+            <div class="featured-content">
+                <div class="featured-label">Best Value</div>
+                <h2 class="featured-title">Full Recovery <span>Combo</span></h2>
+                <p class="featured-desc">The ultimate wellness experience combining the power of ice, steam, and jacuzzi therapy. Designed for those seeking complete physical and mental restoration.</p>
+                
+                <div class="featured-benefits">
+                    <div class="featured-benefit">
+                        <div class="featured-benefit-icon">
+                            <svg viewBox="0 0 24 24" stroke-width="1.5">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <span>Complete Recovery</span>
+                    </div>
+                    <div class="featured-benefit">
+                        <div class="featured-benefit-icon">
+                            <svg viewBox="0 0 24 24" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
+                        </div>
+                        <span>90-120 Minutes</span>
+                    </div>
+                    <div class="featured-benefit">
+                        <div class="featured-benefit-icon">
+                            <svg viewBox="0 0 24 24" stroke-width="1.5">
+                                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                            </svg>
+                        </div>
+                        <span>Premium Experience</span>
+                    </div>
+                    <div class="featured-benefit">
+                        <div class="featured-benefit-icon">
+                            <svg viewBox="0 0 24 24" stroke-width="1.5">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                        </div>
+                        <span>Deep Relaxation</span>
+                    </div>
+                </div>
+
+                <!-- BOOKING LINK: Replace # with your booking page URL -->
+                <a href="booking.html" class="featured-cta">
+                    Book This Experience
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Combo Packages -->
+    <section class="combo-section">
+        <div class="combo-header reveal">
+            <h2>Combo <span>Packages</span></h2>
+            <p>Maximize your recovery with our carefully curated therapy combinations</p>
+        </div>
+
+        <div class="combo-grid">
+            <div class="combo-card reveal reveal-delay-1">
+                <div class="combo-icon">
+                    <svg viewBox="0 0 24 24" stroke-width="1.5">
+                        <path d="M12 2L14.5 8.5L21 9.5L16.5 14.5L17.5 21L12 17.5L6.5 21L7.5 14.5L3 9.5L9.5 8.5L12 2Z"/>
+                        <path d="M12 8v8"/>
+                    </svg>
+                </div>
+                <h3 class="combo-title">Ice + Steam</h3>
+                <p class="combo-includes">Contrast therapy combining cold immersion with steam detox for enhanced circulation.</p>
+                <div class="combo-pricing">
+                    <span class="combo-price">₹1,499</span>
+                    <span class="combo-original">₹1,799</span>
+                    <div class="combo-savings">Save 17%</div>
+                </div>
+                <!-- BOOKING LINK: Replace # with your booking page URL -->
+                <a href="booking.html" class="combo-btn">Select Package</a>
+            </div>
+
+            <div class="combo-card popular reveal reveal-delay-2">
+                <div class="combo-popular-badge">Most Popular</div>
+                <div class="combo-icon">
+                    <svg viewBox="0 0 24 24" stroke-width="1.5">
+                        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                    </svg>
+                </div>
+                <h3 class="combo-title">Full Recovery</h3>
+                <p class="combo-includes">Complete wellness journey with ice bath, jacuzzi, and steam - our signature experience.</p>
+                <div class="combo-pricing">
+                    <span class="combo-price">₹2,499</span>
+                    <span class="combo-original">₹2,999</span>
+                    <div class="combo-savings">Save 17%</div>
+                </div>
+                <!-- BOOKING LINK: Replace # with your booking page URL -->
+                <a href="booking.html" class="combo-btn">Select Package</a>
+            </div>
+
+            <div class="combo-card reveal reveal-delay-3">
+                <div class="combo-icon">
+                    <svg viewBox="0 0 24 24" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                    </svg>
+                </div>
+                <h3 class="combo-title">Ice + Jacuzzi</h3>
+                <p class="combo-includes">Perfect balance of cold shock and warm relaxation for muscle recovery.</p>
+                <div class="combo-pricing">
+                    <span class="combo-price">₹1,699</span>
+                    <span class="combo-original">₹1,999</span>
+                    <div class="combo-savings">Save 15%</div>
+                </div>
+                <!-- BOOKING LINK: Replace # with your booking page URL -->
+                <a href="booking.html" class="combo-btn">Select Package</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-shapes">
+            <div class="cta-shape cta-shape-1"></div>
+            <div class="cta-shape cta-shape-2"></div>
+        </div>
+        <div class="cta-content">
+            <div class="cta-label">Begin Your Journey</div>
+            <h2>Ready to Transform?</h2>
+            <p>Experience the science of recovery and unlock your body's full potential</p>
+            <div class="cta-buttons">
+                <!-- BOOKING LINK: Replace # with your booking page URL -->
+                <a href="booking.html" class="cta-btn-primary">
+                    Book Your Session
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <a href="#" class="cta-btn-secondary">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <a href="#" class="footer-logo">Chill Thrive</a>
+            <div class="footer-links">
+                <a href="#">Services</a>
+                <a href="#">About</a>
+                <a href="#">Pricing</a>
+                <a href="#">Contact</a>
+                <a href="#">FAQ</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Chill Thrive. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Preloader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.preloader').classList.add('hidden');
+            }, 2000);
+        });
+
+        // Navigation scroll effect
+        const nav = document.querySelector('.nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Service Cards Navigation with Buttons
+        const track = document.getElementById('servicesTrack');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const dots = document.querySelectorAll('.progress-dot');
+        const cards = document.querySelectorAll('.service-card');
+        const totalCards = cards.length;
+        let currentIndex = 0;
+
+        function getCardWidth() {
+            const card = cards[0];
+            const style = getComputedStyle(track);
+            const gap = parseInt(style.gap) || 40;
+            return card.offsetWidth + gap;
+        }
+
+        function updateSlider() {
+            const cardWidth = getCardWidth();
+            const translateX = -currentIndex * cardWidth;
+            track.style.transform = `translateX(${translateX}px)`;
+
+            // Update buttons
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex >= totalCards - 1;
+
+            // Update dots
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        function goToSlide(index) {
+            currentIndex = Math.max(0, Math.min(index, totalCards - 1));
+            updateSlider();
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlider();
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < totalCards - 1) {
+                currentIndex++;
+                updateSlider();
+            }
+        });
+
+        // Dot click navigation
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const index = parseInt(dot.dataset.index);
+                goToSlide(index);
+            });
+        });
+
+        // Handle resize
+        window.addEventListener('resize', () => {
+            updateSlider();
+        });
+
+        // Touch/Swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        track.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        track.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+
+            if (diff > swipeThreshold && currentIndex < totalCards - 1) {
+                currentIndex++;
+                updateSlider();
+            } else if (diff < -swipeThreshold && currentIndex > 0) {
+                currentIndex--;
+                updateSlider();
+            }
+        }
+
+        // Scroll reveal animations
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    if (entry.target.id === 'featuredService') {
+                        entry.target.classList.add('in-view');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements
+        document.querySelectorAll('.reveal, .services-intro h2, .services-intro p, #featuredService').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Initial update
+        updateSlider();
+    </script>
+</body>
+</html>

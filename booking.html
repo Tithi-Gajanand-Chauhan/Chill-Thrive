@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
   <title>Book a Session | Chill Thrive</title>
   <link rel="stylesheet" href="style.css">
@@ -18,23 +19,23 @@
     <h1>Book a Session</h1>
     <p>Reserve your recovery experience</p>
 
-    <form class="booking-form">
-      <input type="text"  placeholder="Full Name" required>
-      <input type="email" placeholder="Email Address" required>
-      <input type="tel" pattern="[0-9]{10}"  maxlength="10" title="Please enter a 10-digit mobile number"  placeholder="Mobile Number" 
+    <form class="booking-form" action="https://formspree.io/f/mvzzjrlo" method="POST">
+      <input type="text"  placeholder="Full Name" name="Full Name" required>
+      <input type="email" placeholder="Email Address" name="Email" required>
+      <input type="tel" name="Phone" pattern="[0-9]{10}"  maxlength="10" title="Please enter a 10-digit mobile number"  placeholder="Mobile Number" 
        oninput="this.value = this.value.replace(/[^0-9]/g, '');" 
        required>
       
-      <select required>
-        <option value=""disabled selected>Select Service</option>
+      <select name="Service" required>
+        <option value="disabled selected">Select Service</option>
         <option>Ice Bath</option>
         <option>Steam Bath</option>
         <option>Jacuzzi</option>
         <option>Full Recovery Combo</option>
       </select>
 
-      <input type="date" required>
-      <input type="time" required>
+      <input type="date" name="Date" required>
+      <input type="time" name="Time" required>
 
       <button type="submit" class="btn primary">Confirm Booking</button>
     </form>
@@ -44,17 +45,9 @@
 
 </section>
 
-<script>
-  const form = document.querySelector(".booking-form");
-  const message = document.getElementById("confirmation");
 
-  form.addEventListener("submit", function(e) {
-    e.preventDefault();
-    message.style.display = "block";
-    form.reset();
-  });
-</script>
 
 
 </body>
 </html>
+

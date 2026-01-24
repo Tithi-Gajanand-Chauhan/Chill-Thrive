@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book a Session | Chill Thrive</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <!-- reuse your existing header here -->
+</header>
+<section class="booking-hero">
+
+  <div class="booking-overlay"></div>
+
+  <div class="booking-card">
+    <h1>Book a Session</h1>
+    <p>Reserve your recovery experience</p>
+
+    <form class="booking-form">
+      <input type="text"  placeholder="Full Name" required>
+      <input type="email" placeholder="Email Address" required>
+      <input type="tel" pattern="[0-9]{10}"  maxlength="10" title="Please enter a 10-digit mobile number"  placeholder="Mobile Number" 
+       oninput="this.value = this.value.replace(/[^0-9]/g, '');" 
+       required>
+      
+      <select required>
+        <option value=""disabled selected>Select Service</option>
+        <option>Ice Bath</option>
+        <option>Steam Bath</option>
+        <option>Jacuzzi</option>
+        <option>Full Recovery Combo</option>
+      </select>
+
+      <input type="date" required>
+      <input type="time" required>
+
+      <button type="submit" class="btn primary">Confirm Booking</button>
+    </form>
+
+    <p id="confirmation">✅ Your session has been booked!</p>
+  </div>
+
+</section>
+
+<script>
+  const form = document.querySelector(".booking-form");
+  const message = document.getElementById("confirmation");
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    message.style.display = "block";
+    form.reset();
+  });
+</script>
+
+
+</body>
+</html>

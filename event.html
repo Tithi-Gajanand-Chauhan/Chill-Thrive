@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events & Workshops - Chill Thrive</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Lato:wght@300;400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: #2d2d2d;
+            background: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(56, 189, 248, 0.1) 100%);
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.2;
+            animation: slowZoom 30s ease-in-out infinite alternate;
+        }
+
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #0369a1;
+            max-width: 900px;
+            padding: 0 30px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 0.875rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            font-weight: 300;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.3s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 0.8; }
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem;
+            font-weight: 300;
+            line-height: 1.2;
+            letter-spacing: 1px;
+            margin-bottom: 0;
+            opacity: 0;
+            animation: fadeInUp 1.2s ease-out 0.2s forwards;
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 50px;
+            border: 2px solid rgba(14, 165, 233, 0.4);
+            border-radius: 20px;
+            animation: scrollBounce 2s ease-in-out infinite;
+        }
+
+        .scroll-indicator::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: #0ea5e9;
+            border-radius: 50%;
+            animation: scrollDot 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollBounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        @keyframes scrollDot {
+            0% { opacity: 1; top: 8px; }
+            100% { opacity: 0; top: 30px; }
+        }
+
+        /* Section */
+        .section {
+            padding: 100px 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-intro {
+            max-width: 800px;
+            margin: 0 auto 80px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #0ea5e9;
+            margin-bottom: 25px;
+            font-weight: 400;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 300;
+            color: #2d2d2d;
+            margin-bottom: 30px;
+            line-height: 1.3;
+        }
+
+        .section-description {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: #666;
+            font-weight: 300;
+        }
+
+        /* Events Grid */
+        .events-container {
+            display: grid;
+            gap: 0;
+        }
+
+        .event-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            min-height: 600px;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: slideUp 1s ease-out forwards;
+        }
+
+        .event-item:nth-child(1) { animation-delay: 0.2s; }
+        .event-item:nth-child(2) { animation-delay: 0.4s; }
+        .event-item:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .event-item:nth-child(even) .event-image {
+            order: 2;
+        }
+
+        .event-item:nth-child(even) .event-content {
+            order: 1;
+        }
+
+        .event-image {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+        }
+
+        .event-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.15) 0%, rgba(56, 189, 248, 0.15) 100%);
+            z-index: 1;
+            transition: opacity 0.6s ease;
+        }
+
+        .event-item:hover .event-image::before {
+            opacity: 0;
+        }
+
+        .event-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 12s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .event-item:hover .event-image img {
+            transform: scale(1.08);
+        }
+
+        .event-content {
+            padding: 80px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            transition: background 0.6s ease;
+        }
+
+        .event-item:hover .event-content {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+        }
+
+        .event-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #0ea5e9;
+            margin-bottom: 20px;
+            font-weight: 400;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 0.3s forwards;
+        }
+
+        .event-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: #2d2d2d;
+            margin-bottom: 15px;
+            line-height: 1.3;
+            transition: color 0.4s ease;
+        }
+
+        .event-item:hover .event-title {
+            color: #0369a1;
+        }
+
+        .event-date {
+            font-size: 0.875rem;
+            color: #0ea5e9;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+            font-weight: 400;
+        }
+
+        .event-description {
+            font-size: 1rem;
+            line-height: 1.9;
+            color: #555;
+            margin-bottom: 35px;
+            font-weight: 300;
+        }
+
+        .event-details {
+            margin-bottom: 40px;
+        }
+
+        .detail-row {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(14, 165, 233, 0.2);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .detail-row:first-child {
+            border-top: 1px solid rgba(14, 165, 233, 0.2);
+        }
+
+        .detail-row:hover {
+            padding-left: 10px;
+            border-bottom-color: #0ea5e9;
+        }
+
+        .detail-label {
+            min-width: 120px;
+            color: #0ea5e9;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
+
+        .detail-value {
+            color: #2d2d2d;
+        }
+
+        .event-cta {
+            display: inline-block;
+            padding: 15px 40px;
+            background: transparent;
+            border: 1px solid #0ea5e9;
+            color: #0ea5e9;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            align-self: flex-start;
+            font-weight: 400;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 100%);
+            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+        }
+
+        .event-cta:hover {
+            color: white;
+            border-color: #0ea5e9;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
+        }
+
+        .event-cta:hover::before {
+            left: 0;
+        }
+
+        /* Gallery */
+        .gallery-section {
+            padding: 100px 30px;
+            background: linear-gradient(to bottom, #f0f9ff 0%, #e0f2fe 100%);
+        }
+
+        .gallery-intro {
+            max-width: 800px;
+            margin: 0 auto 80px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            cursor: pointer;
+            opacity: 0;
+            transform: scale(0.95);
+            animation: zoomIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .gallery-item:nth-child(1) { animation-delay: 0.1s; }
+        .gallery-item:nth-child(2) { animation-delay: 0.2s; }
+        .gallery-item:nth-child(3) { animation-delay: 0.3s; }
+        .gallery-item:nth-child(4) { animation-delay: 0.4s; }
+        .gallery-item:nth-child(5) { animation-delay: 0.5s; }
+        .gallery-item:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes zoomIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .gallery-item:nth-child(1) {
+            grid-column: span 2;
+            grid-row: span 2;
+            height: 830px;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.2) 0%, rgba(56, 189, 248, 0.2) 100%);
+            z-index: 1;
+            transition: opacity 0.6s ease;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 0;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 12s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.12);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 40px;
+            background: linear-gradient(to top, rgba(3, 105, 161, 0.9) 0%, transparent 100%);
+            color: white;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gallery-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.75rem;
+            font-weight: 300;
+            margin-bottom: 8px;
+            transform: translateY(20px);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+        }
+
+        .gallery-item:hover .gallery-title {
+            transform: translateY(0);
+        }
+
+        .gallery-date {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            letter-spacing: 1px;
+            transform: translateY(20px);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+        }
+
+        .gallery-item:hover .gallery-date {
+            transform: translateY(0);
+        }
+
+        /* Quote Section */
+        .quote-section {
+            padding: 120px 30px;
+            text-align: center;
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #e0f2fe 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .quote-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .quote-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.25rem;
+            font-weight: 300;
+            line-height: 1.6;
+            color: #0369a1;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .quote-author {
+            font-size: 0.875rem;
+            color: #0ea5e9;
+            letter-spacing: 1px;
+            font-weight: 400;
+        }
+
+        /* Floating elements */
+        .floating-element {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .floating-1 {
+            top: 10%;
+            left: 5%;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .floating-2 {
+            bottom: 10%;
+            right: 5%;
+            animation: float 25s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .event-item {
+                grid-template-columns: 1fr;
+            }
+
+            .event-item:nth-child(even) .event-image,
+            .event-item:nth-child(even) .event-content {
+                order: initial;
+            }
+
+            .event-content {
+                padding: 60px 40px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-item:nth-child(1) {
+                grid-column: span 1;
+                grid-row: span 1;
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .section {
+                padding: 60px 20px;
+            }
+
+            .section-title {
+                font-size: 2.25rem;
+            }
+
+            .event-title {
+                font-size: 2rem;
+            }
+
+            .event-content {
+                padding: 40px 30px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .quote-text {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1920&q=80" alt="Chill Thrive Wellness" class="hero-image">
+        <div class="hero-content">
+            <p class="hero-subtitle">Wellness Experiences</p>
+            <h1 class="hero-title">Events & Workshops</h1>
+        </div>
+        <div class="scroll-indicator"></div>
+        <div class="floating-element floating-1"></div>
+        <div class="floating-element floating-2"></div>
+    </section>
+
+    <!-- Introduction -->
+    <section class="section">
+        <div class="section-intro">
+            <p class="section-label">Join Our Community</p>
+            <h2 class="section-title">Transformative Wellness Journeys</h2>
+            <p class="section-description">At Chill Thrive, we curate immersive wellness experiences that blend the science of recovery with the power of community. Each event is designed to deepen your understanding of cold and heat therapy while connecting you with like-minded individuals on the path to resilience.</p>
+        </div>
+
+        <!-- Events -->
+        <div class="events-container">
+            <!-- Event 1 -->
+            <div class="event-item">
+                <div class="event-image">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&q=80" alt="Cold Therapy Workshop">
+                </div>
+                <div class="event-content">
+                    <span class="event-badge">Workshop</span>
+                    <h3 class="event-title">Cold Therapy Masterclass</h3>
+                    <p class="event-date">15 February 2026</p>
+                    <p class="event-description">Discover the transformative power of cold immersion therapy in this comprehensive masterclass. Led by certified recovery experts, you'll learn the science behind ice bath therapy, proper immersion techniques, breathing protocols, and safety guidelines. Perfect for athletes, wellness enthusiasts, and anyone seeking to enhance their recovery practice.</p>
+                    <div class="event-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Time</span>
+                            <span class="detail-value">10:00 AM - 12:00 PM</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Duration</span>
+                            <span class="detail-value">2 Hours</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Location</span>
+                            <span class="detail-value">Chill Thrive Recovery Studio</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Capacity</span>
+                            <span class="detail-value">Limited to 15 Participants</span>
+                        </div>
+                    </div>
+                    <a href="#" class="event-cta">Reserve Your Spot</a>
+                </div>
+            </div>
+
+            <!-- Event 2 -->
+            <div class="event-item">
+                <div class="event-image">
+                    <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=1200&q=80" alt="Community Wellness Event">
+                </div>
+                <div class="event-content">
+                    <span class="event-badge">Community Event</span>
+                    <h3 class="event-title">Recovery & Resilience Gathering</h3>
+                    <p class="event-date">22 February 2026</p>
+                    <p class="event-description">An evening dedicated to connection, wellness, and shared experience. Join our community for a curated journey through ice bath therapy, steam bath relaxation, and jacuzzi recovery sessions. Connect with fellow wellness enthusiasts, share insights, and experience the power of community-driven healing in a supportive environment.</p>
+                    <div class="event-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Time</span>
+                            <span class="detail-value">6:00 PM - 9:00 PM</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Duration</span>
+                            <span class="detail-value">3 Hours</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Location</span>
+                            <span class="detail-value">Chill Thrive Recovery Studio</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Capacity</span>
+                            <span class="detail-value">Open to All Levels</span>
+                        </div>
+                    </div>
+                    <a href="#" class="event-cta">Join the Community</a>
+                </div>
+            </div>
+
+            <!-- Event 3 -->
+            <div class="event-item">
+                <div class="event-image">
+                    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1200&q=80" alt="Breathwork and Ice Bath">
+                </div>
+                <div class="event-content">
+                    <span class="event-badge">Special Session</span>
+                    <h3 class="event-title">Breathwork & Ice Immersion</h3>
+                    <p class="event-date">8 March 2026</p>
+                    <p class="event-description">Experience the synergy of conscious breathing and cold exposure in this transformative morning session. Drawing from the Wim Hof method, certified instructors will guide you through powerful breathing techniques before leading you into a guided ice bath practice designed to enhance mental clarity, reduce stress, and build resilience.</p>
+                    <div class="event-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Time</span>
+                            <span class="detail-value">7:00 AM - 9:00 AM</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Duration</span>
+                            <span class="detail-value">2 Hours</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Location</span>
+                            <span class="detail-value">Chill Thrive Recovery Studio</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Capacity</span>
+                            <span class="detail-value">12 Spots Available</span>
+                        </div>
+                    </div>
+                    <a href="#" class="event-cta">Book Your Session</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="quote-section">
+        <div class="quote-content">
+            <p class="quote-text">"Welcome to Chill Thrive - Where Recovery Meets Resilience. It is our privilege to share these transformative wellness experiences with you."</p>
+            <p class="quote-author">— Chill Thrive Wellness Team</p>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="gallery-intro">
+            <p class="section-label">Past Experiences</p>
+            <h2 class="section-title">Event Highlights</h2>
+            <p class="section-description">A glimpse into our community wellness gatherings, workshops, and transformative recovery sessions.</p>
+        </div>
+
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1200&q=80" alt="New Year Recovery Challenge" class="gallery-image">
+                <div class="gallery-overlay">
+                    <h3 class="gallery-title">New Year Recovery Challenge</h3>
+                    <p class="gallery-date">January 2026</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&q=80" alt="Wellness Workshop" class="gallery-image">
+                <div class="gallery-overlay">
+                    <h3 class="gallery-title">Wellness Workshop Series</h3>
+                    <p class="gallery-date">December 2025</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=80" alt="Community Gathering" class="gallery-image">
+                <div class="gallery-overlay">
+                    <h3 class="gallery-title">Community Wellness Gathering</h3>
+                    <p class="gallery-date">November 2025</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&q=80" alt="Athletes Recovery Day" class="gallery-image">
+                <div class="gallery-overlay">
+                    <h3 class="gallery-title">Athletes Recovery Day</h3>
+                    <p class="gallery-date">October 2025</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800&q=80" alt="Founder Vision Talk" class="gallery-image">
+                <div class="gallery-overlay">
+                    <h3 class="gallery-title">Founder's Vision Talk</h3>
+                    <p class="gallery-date">September 2025</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1552196563-55cd4e45efb3?w=800&q=80" alt="Behind the Scenes" class="gallery-image">
+                <div class="gallery-overlay">
+                    <h3 class="gallery-title">Studio Preparation</h3>
+                    <p class="gallery-date">Behind the Scenes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

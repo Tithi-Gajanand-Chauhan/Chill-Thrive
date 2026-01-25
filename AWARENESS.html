@@ -29,7 +29,7 @@
         #FFFFFF 100%   /* clean white */
     );
 
-    animation: fadeInPage 0.8s ease-out forwards;
+
 }
 
 .section-title {
@@ -120,17 +120,7 @@ h1, h2 {
         transform: translateY(0);
     }
 }
-@keyframes float {
-    0% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-    100% {
-        transform: translateY(0);
-    }
-}
+
 
 
     
@@ -142,16 +132,19 @@ h1, h2 {
     /* slideUp happens once (0.8s) | float repeats forever (3s) */
     /* We add a 0.8s delay to 'float' so 'slideUp' can finish first */
     animation: slideUp 0.8s ease-out forwards, 
-               float 3s ease-in-out infinite 0.8s;
     
-    opacity: 0; /* Keeps card hidden until slideUp starts */
+    opacity: 1; /* Keeps card hidden until slideUp starts */
 }
 .card:hover{
     background-color: white;
     border-radius: 40px;
     padding: 25px;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
     
-    transition: transform 0.3s ease ;
   
 }
 .science-icon {
